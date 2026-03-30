@@ -18,6 +18,8 @@ const allowedOrigins = (process.env.FRONTEND_URL || '')
   .filter(Boolean);
 
 app.disable('x-powered-by');
+// Render sits behind a proxy/load balancer, so Express must trust it for rate limiting and IP detection.
+app.set('trust proxy', 1);
 
 app.use(
   helmet({
